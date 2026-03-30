@@ -2,7 +2,7 @@
 
 This repo is a  module for nixos to easyly install **River** Wayland compositor with kwm windowmanager, featuring a custom **Zig-based window manager (kwm)**. This project automates the build process, environment setup, and session integration.
 
-![Preview Placeholder](https://via.placeholder.com)
+
 
 # official repo https://github.com/kewuaa/kwm
 
