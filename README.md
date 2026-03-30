@@ -4,7 +4,10 @@ This repo is a  module for nixos to easyly install **River** Wayland compositor 
 
 
 
-# official repo https://github.com/kewuaa/kwm
+# Official repo kwm
+```
+https://github.com/kewuaa/kwm
+```
 
 ## ✨ Features
 
