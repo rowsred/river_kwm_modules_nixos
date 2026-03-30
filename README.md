@@ -4,6 +4,8 @@ This repo is a  module for nixos to easyly install **River** Wayland compositor 
 
 ![Preview Placeholder](https://via.placeholder.com)
 
+# official repo https://github.com/kewuaa/kwm
+
 ## ✨ Features
 
 *   **Native Zig Build**: Compiles `kwm` from source using Nix's sandboxed build environment.
