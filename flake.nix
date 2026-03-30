@@ -1,5 +1,5 @@
 {
-  description = "kwm overlay";
+  description = "kwm modules";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
