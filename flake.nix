@@ -21,8 +21,8 @@
         src = pkgs.fetchFromGitHub {
           owner = "kewuaa";
           repo = "kwm";
-          rev = "master";
-          sha256 = "sha256-dJpYq42YUQzdBpjKVnWJ0W1fj+VrDKYmVRBSzZsQkec=";
+          rev = "v0.2.1";
+          sha256 = "sha256-N/K+AcDC1TnlhZqjyFf/HlYt0s9lP7JaA00losVnops=";
         };
 
         deps = pkgs.callPackage ./deps.nix { };
