@@ -17,7 +17,8 @@ linkFarm "zig-packages" [
   {
     name = "mvzr-0.3.7-ZSOky5FtAQB2VrFQPNbXHQCFJxWTMAYEK7ljYEaMR6jt";
     path = fetchzip {
-      url = "https://codeload.github.com/mnemnion/mvzr/tar.gz/refs/tags/v0.3.7";
+      url = "https://github.com/mnemnion/mvzr/archive/refs/tags/v0.3.7.tar.gz";
+      #url = "https://codeload.github.com/mnemnion/mvzr/tar.gz/refs/tags/v0.3.7";
       hash = "sha256-RsnjkmsAZAuwO75S9Zy2dW117E6APOgHRKC2ReMAkik=";
     };
   }

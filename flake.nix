@@ -26,6 +26,7 @@
         };
 
         deps = pkgs.callPackage ./deps.nix { };
+
         zigBuildFlags = [
           "--system"
           "${deps}"
@@ -44,11 +45,13 @@
           pkgs.wayland-protocols
           pkgs.libxkbcommon
         ];
+        preBuild = ''
+          export HOME=$TMPDIR
+          export ZIG_GLOBAL_CACHE_DIR=$TMPDIR/zig-cache
+          mkdir -p $ZIG_GLOBAL_CACHE_DIR
 
-        buildPhase = ''
-          zig build -Doptimize=ReleaseSafe $zigBuildFlags
+          cp -r ${deps}/* $ZIG_GLOBAL_CACHE_DIR/
         '';
-
         installPhase = ''
           mkdir -p $out/bin
           cp zig-out/bin/kwm $out/bin/
