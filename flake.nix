@@ -21,16 +21,11 @@
         src = pkgs.fetchFromGitHub {
           owner = "kewuaa";
           repo = "kwm";
-          rev = "v0.2.1";
-          sha256 = "sha256-N/K+AcDC1TnlhZqjyFf/HlYt0s9lP7JaA00losVnops=";
+          rev = "v0.2.2";
+          sha256 = "sha256-Vfdi9AXf3497JAVrdMcheQcDFnqgSrXQy92+pU02c/Q=";
         };
 
         deps = pkgs.callPackage ./deps.nix { };
-
-        zigBuildFlags = [
-          "--system"
-          "${deps}"
-        ];
 
         nativeBuildInputs = [
           pkgs.zig
@@ -45,12 +40,16 @@
           pkgs.wayland-protocols
           pkgs.libxkbcommon
         ];
-        preBuild = ''
-          export HOME=$TMPDIR
-          export ZIG_GLOBAL_CACHE_DIR=$TMPDIR/zig-cache
-          mkdir -p $ZIG_GLOBAL_CACHE_DIR
 
-          cp -r ${deps}/* $ZIG_GLOBAL_CACHE_DIR/
+        preBuild = ''
+          export ZIG_GLOBAL_CACHE_DIR=$TMPDIR/zig-cache
+          mkdir -p $ZIG_GLOBAL_CACHE_DIR/p
+
+          # This assumes 'deps' is a folder containing the extracted dependency folders
+          # named by their multihash (e.g., 1220...)
+          if [ -d "${deps}" ]; then
+            cp -r ${deps}/* $ZIG_GLOBAL_CACHE_DIR/p/
+          fi
         '';
         installPhase = ''
           mkdir -p $out/bin
