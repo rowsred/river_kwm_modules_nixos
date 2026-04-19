@@ -1,5 +1,5 @@
-#Based version : v0.2.2
-# River KWM NixOS Module
+
+# River KWM NixOS Module V.0.2.2
 
 This repo is a  module for nixos to easyly install **River** Wayland compositor with kwm windowmanager, featuring a custom **Zig-based window manager (kwm)**. This project automates the build process, environment setup, and session integration.
 
