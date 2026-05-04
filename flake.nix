@@ -70,7 +70,7 @@
         };
 
         nativeBuildInputs = [
-          pkgs.zig
+          pkgs.zig_0_15
           pkgs.pkg-config
           pkgs.pixman
           pkgs.fcft
