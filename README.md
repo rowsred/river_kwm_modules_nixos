@@ -1,4 +1,4 @@
-# River KWM NixOS Module V.0.2.2
+# River KWM Module V.0.2.2
 
 This repository provides a Nix module for NixOS and Home Manager to easily install the **River** Wayland compositor integrated with **kwm**, a custom **Zig-based window manager**. This project automates the build process, environment setup, and session integration.
 
