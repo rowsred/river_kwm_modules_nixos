@@ -1,7 +1,6 @@
-
 # River KWM NixOS Module V.0.2.2
 
-This repo is a  module for nixos to easyly install **River** Wayland compositor with kwm windowmanager, featuring a custom **Zig-based window manager (kwm)**. This project automates the build process, environment setup, and session integration.
+This repository provides a Nix module for NixOS and Home Manager to easily install the **River** Wayland compositor integrated with **kwm**, a custom **Zig-based window manager**. This project automates the build process, environment setup, and session integration.
 
 
 
@@ -18,10 +17,7 @@ This repo is a  module for nixos to easyly install **River** Wayland compositor 
 ---
 
 ## 🚀 Installation
-
-Add this flake to your system configuration using the following steps:
-
-### 1. Update `flake.nix`
+### 2. For nixosModule (Highly Recommended) `flake.nix`
 
 Add the repository to your inputs:
 
@@ -46,3 +42,47 @@ Add the repository to your inputs:
     };
   };
 }
+
+```
+### 2. for homeModules `flake.nix`
+
+```nix
+{
+  inputs = {
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    home-manager = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    # 2. Add river-kwm-module
+    river-kwm.url = "github:rowsred/river_kwm_modules_nixos";
+  };
+
+  outputs = { self, nixpkgs, home-manager, river-kwm, ... }: {
+    homeConfigurations."YOUR_USERNAME" = home-manager.lib.homeManagerConfiguration {
+      pkgs = nixpkgs.legacyPackages."x86_64-linux";
+      
+      modules = [
+        ./home.nix
+        # 3. Include the Home Manager module
+        river-kwm.homeManagerModules.default
+      ];
+    };
+  };
+}
+```
+## ⚠️ Important for home-manager users : Post-Build Notes
+If you are using this module on a non-NixOS system, please follow these critical steps after a successful rebuild:
+
+### 1. Manual Launch (TTY)
+After rebuilding, you can start the session directly from the **TTY** by logging into your user and running:
+```bash
+river -c kwm
+```
+## 2. Why TTY? (Display Manager Notice)
+The Home Manager module generates a .desktop file in the user profile. However, most Display Managers (like SDDM) do not scan user-level directories.
+# To use a Display Manager:
+You must manually copy the session file to the system directory so the DM can "see" it:
+```bash
+sudo cp ~/.nix-profile/share/wayland-sessions/*.desktop /usr/share/wayland-sessions/
+```
