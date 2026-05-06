@@ -51,7 +51,7 @@ Add the repository to your inputs:
 }
 
 ```
-### 2. Non-NixOS `flake.nix`
+### 2. home-manager or Non-NixOS `flake.nix`
 
 ```nix
 {
@@ -78,17 +78,17 @@ Add the repository to your inputs:
   };
 }
 ```
-## ⚠️ Important for home-manager or Non-NixOS users : Post-Build Notes
+# ⚠️ Important for home-manager or Non-NixOS users : Post-Build Notes
 If you are using this module on a non-NixOS system, please follow these critical steps after a successful rebuild:
 
-### 1. Manual Launch (TTY)
+# 1. Manual Launch (TTY)
 After rebuilding, you can start the session directly from the **TTY** by logging into your user and running:
 ```bash
 river -c kwm
 ```
-## 2. Why TTY? (Display Manager Notice)
+# 2. Why TTY? (Display Manager Notice)
 The Home Manager module generates a .desktop file in the user profile. However, most Display Managers (like SDDM) do not scan user-level directories.
-# To use a Display Manager:
+To use a Display Manager:
 You must manually copy the session file to the system directory so the DM can "see" it:
 ```bash
 sudo cp ~/.nix-profile/share/wayland-sessions/*.desktop /usr/share/wayland-sessions/
