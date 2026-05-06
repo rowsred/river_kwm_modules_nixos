@@ -16,8 +16,15 @@ This repository provides a Nix module for NixOS and Home Manager to easily insta
 
 ---
 
-## 🚀 Installation
-### 2. For nixosModule (Highly Recommended) `flake.nix`
+## 📊 Platform Support & Recommendation
+
+| Platform     | Recommended Module | Note                                                                 |
+|--------------|-------------------|----------------------------------------------------------------------|
+| NixOS        | NixOS Module      | ⭐ **Highly Recommended**. Handles SDDM integration and system environment variables automatically. |
+| Non-NixOS    | Home Manager      | ⚠️ Only tested on **Void Linux**. Manual steps (e.g. copying `.desktop`) are required for full integration. 
+
+
+### 1. NixOS Module (Highly Recommended) `flake.nix`
 
 Add the repository to your inputs:
 
@@ -44,7 +51,7 @@ Add the repository to your inputs:
 }
 
 ```
-### 2. for homeModules `flake.nix`
+### 2. Non-NixOS `flake.nix`
 
 ```nix
 {
@@ -71,7 +78,7 @@ Add the repository to your inputs:
   };
 }
 ```
-## ⚠️ Important for home-manager users : Post-Build Notes
+## ⚠️ Important for home-manager or Non-NixOS users : Post-Build Notes
 If you are using this module on a non-NixOS system, please follow these critical steps after a successful rebuild:
 
 ### 1. Manual Launch (TTY)
