@@ -72,7 +72,7 @@ Add the repository to your inputs:
       modules = [
         ./home.nix
         # 3. Include the Home Manager module
-        river-kwm.homeManagerModules.default
+        river-kwm.homeModules.default
       ];
     };
   };
