@@ -30,7 +30,6 @@
           pkgs.pixman
           pkgs.fcft
         ];
-        kwm_deps = pkgs.callPackage ./deps.nix { };
 
         buildInputs = [
           pkgs.wayland
@@ -38,10 +37,26 @@
           pkgs.wayland-protocols
           pkgs.libxkbcommon
         ];
-        buildPhase = ''
-          zig build --release=fast --system ${kwm_deps}
+        # Source : https://zigtools.org/zls/guides/packaging/
+        #├── build.zig
+        #├── build.zig.zon
+        #├── LICENSE
+        #├── README.md
+        #├── src
+        #└── zig-pkg
+        #    ├── diffz-0.0.1-G2tlIYrNAQAQx3cuIp7EVs0xvxbv9DCPf4YuHmvubsrZ
+        # NOTE: Zig 0.16 requires this specific local directory to scan for dependencies.
+        #     # Since Nix disables internet access during builds, we will manually create
+        #     # this `zig-pkg` folder and link our `kwm_deps` inside the `preBuild` phase.
+        kwm_deps = pkgs.callPackage ./deps.nix { };
+        preBuild = ''
+          mkdir -p zig-pkg
+          cp -r ${kwm_deps}/* zig-pkg
         '';
-
+        buildPhase = ''
+          runHook preBuild
+          zig build --release=fast
+        '';
         installPhase = ''
                     runHook preInstall
                     
