@@ -88,8 +88,23 @@ river -c kwm
 ```
 # 2. Why TTY? (Display Manager Notice)
 The Home Manager module generates a .desktop file in the user profile. However, most Display Managers (like SDDM) do not scan user-level directories.
-To use a Display Manager:
-You must manually copy the session file to the system directory so the DM can "see" it:
+To use a Display Manager, you must copy the generated session file to the global directory.
+
+You can do this manually:
 ```bash
 sudo cp ~/.nix-profile/share/wayland-sessions/*.desktop /usr/share/wayland-sessions/
 ```
+
+Or you can do this with Home-Manager:
+```nix
+
+home.activation = {
+  copyKwmDesktopFile = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+      run /usr/bin/sudo cp $HOME/.nix-profile/share/wayland-sessions/*.desktop /usr/share/wayland-sessions/
+  '';
+};
+```
+
+Doing this with Home-Manager is impure,
+requires an interactive session and must have a TTY (so you cannot use `nh switch`),
+but does save the effort of updating the session file by hand on every `home-manager switch`.
